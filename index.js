@@ -37,8 +37,14 @@ const bookForm = document.forms['book-form'];
 const closeModalBtn = document.querySelector('#close-modal');
 const tabs = document.querySelectorAll('#tabs .nav-link');
 
+function saveToStorage() {
+  localStorage.setItem('books', JSON.stringify(books));
+}
+
 function addBook(book) {
   books.push(book);
+  saveToStorage();
+}
 
 function getActiveTab() {
   let activeTab = [...tabs].find(tab => tab.classList.contains('active'));
@@ -140,6 +146,14 @@ function renderBooks(type) {
     cardSwitch.append(cardCheckbox, readStatus);
     booksRow.appendChild(col);
   });
+  saveToStorage();
+}
+
+// load books from local storage
+let localBooks = localStorage.getItem('books');
+if (localBooks) {
+  books = JSON.parse(localBooks);
+  renderBooks();
 }
 
 function main() {
