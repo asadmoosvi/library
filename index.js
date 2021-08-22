@@ -76,7 +76,7 @@ function renderBooks(type) {
 
     const cardAuthor = document.createElement('small');
     cardAuthor.classList.add('card-text', 'text-muted');
-    cardAuthor.textContent = book.author;
+    cardAuthor.textContent = `by ${book.author}`;
 
     const cardDescription = document.createElement('p');
     cardDescription.classList.add('card-text', 'mt-2');
