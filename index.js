@@ -111,7 +111,7 @@ function renderBooks() {
 
     col.appendChild(card);
     card.append(img, cardBody, cardFooter);
-    cardBody.append(cardAuthor, cardDescription);
+    cardBody.append(cardTitle, cardAuthor, cardDescription);
     cardFooter.append(cardPages, cardSwitch);
     cardSwitch.append(cardCheckbox, readStatus);
     booksRow.appendChild(col);
