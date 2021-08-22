@@ -39,11 +39,19 @@ const tabs = document.querySelectorAll('#tabs .nav-link');
 
 function addBook(book) {
   books.push(book);
+
+function getActiveTab() {
+  let activeTab = [...tabs].find(tab => tab.classList.contains('active'));
+  return activeTab.textContent;
 }
 
-function renderBooks() {
+function renderBooks(type) {
   booksRow.innerHTML = '';
   books.forEach((book, idx) => {
+    if (type === 'Read' && !book.read)
+      return;
+    else if (type === 'Unread' && book.read)
+      return;
     const col = document.createElement('div');
     col.classList.add('col');
 
@@ -88,7 +96,7 @@ function renderBooks() {
 
     cardDelete.addEventListener('click', () => {
       books.splice(cardDelete.dataset.index, 1);
-      renderBooks();
+      renderBooks(getActiveTab());
     });
 
     const cardSwitch = document.createElement('div');
@@ -122,6 +130,7 @@ function renderBooks() {
         console.log('setting index ' + cardCheckbox.dataset.index + ' to false');
         books[cardCheckbox.dataset.index].read = false;
       }
+      renderBooks(getActiveTab());
     });
 
     col.appendChild(card);
@@ -153,7 +162,7 @@ function main() {
     );
     console.log(book);
     addBook(book);
-    renderBooks();
+    renderBooks(getActiveTab());
 
     name.value = '';
     author.value = '';
