@@ -82,7 +82,13 @@ function renderBooks() {
     const cardDelete = document.createElement('a');
     cardDelete.classList.add('text-danger');
     cardDelete.setAttribute('href', '#');
+    cardDelete.dataset.index = idx;
     cardDelete.innerHTML = '<i class="bi bi-trash-fill"></i>';
+
+    cardDelete.addEventListener('click', () => {
+      books.splice(cardDelete.dataset.index, 1);
+      renderBooks();
+    });
 
     const cardSwitch = document.createElement('div');
     cardSwitch.classList.add('form-switch', 'form-check');
