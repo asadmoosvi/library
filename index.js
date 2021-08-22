@@ -157,12 +157,10 @@ function renderBooks(type) {
       if (cardCheckbox.checked) {
         readStatus.textContent = '✓ Read';
         readStatus.setAttribute('class', 'text-success');
-        console.log('setting index ' + cardCheckbox.dataset.index + ' to true');
         books[cardCheckbox.dataset.index].read = true;
       } else {
         readStatus.textContent = 'Not read';
         readStatus.setAttribute('class', 'text-muted');
-        console.log('setting index ' + cardCheckbox.dataset.index + ' to false');
         books[cardCheckbox.dataset.index].read = false;
       }
       renderBooks(getActiveTab());
@@ -214,7 +212,6 @@ function main() {
       description.value,
       coverUrl.value
     );
-    console.log(book);
     addBook(book);
     renderBooks(getActiveTab());
 
