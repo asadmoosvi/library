@@ -33,6 +33,8 @@ function Book(name, author, pages, read, description, coverUrl) {
 
 let books = [];
 const booksRow = document.querySelector('#books');
+const bookForm = document.forms['book-form'];
+const closeModalBtn = document.querySelector('#close-modal');
 
 function addBook(book) {
   books.push(book);
@@ -119,6 +121,35 @@ function renderBooks() {
 }
 
 function main() {
+  bookForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let name = document.querySelector('#name');
+    let author = document.querySelector('#author');
+    let pages = document.querySelector('#pages');
+    let read = document.querySelector('#read');
+    let description = document.querySelector('#description');
+    let coverUrl = document.querySelector('#cover');
+
+    let book = new Book(
+      name.value,
+      author.value,
+      pages.value,
+      read.checked,
+      description.value,
+      coverUrl.value
+    );
+    console.log(book);
+    addBook(book);
+    renderBooks();
+
+    name.value = '';
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
+    description.value = '';
+    coverUrl.value = '';
+    closeModalBtn.click();
+  });
 }
 
 main();
