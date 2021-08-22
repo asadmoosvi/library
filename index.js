@@ -7,6 +7,34 @@ function capitalize(str) {
     .join(' ');
 }
 
+async function getCoverUrl(title, author) {
+  let searchUrl = `https://openlibrary.org/search.json?q=${title}`;
+  return fetch(searchUrl)
+    .then((response) => response.json())
+    .then((json) => {
+      let results = json.docs;
+      let resultFound = null;
+      let coverUrl = null;
+      for (let result of results) {
+        for (let authorName of result.author_name) {
+          let authorNameMin = authorName.toLowerCase().replaceAll(' ', '');
+          if (author.toLowerCase().replaceAll(' ', '') === authorNameMin) {
+            resultFound = result;
+            break;
+          }
+        }
+        if (resultFound) {
+          break;
+        }
+      }
+
+      if (resultFound) {
+        coverUrl = `https://covers.openlibrary.org/b/id/${resultFound.cover_i}-L.jpg`;
+      }
+      return coverUrl;
+    })
+}
+
 function Book(name, author, pages, read, description, coverUrl) {
   // make sure arguments are provided
   if (
@@ -148,6 +176,17 @@ function renderBooks(type) {
     booksRow.appendChild(col);
   });
   saveToStorage();
+
+  books.forEach(book => {
+    if (book.coverUrl.match(/placeholder/)) {
+      getCoverUrl(book.name, book.author).then(url => {
+        if (url) {
+          book.coverUrl = url;
+          renderBooks(getActiveTab());
+        }
+      });
+    }
+  });
 }
 
 // load books from local storage
