@@ -35,6 +35,7 @@ let books = [];
 const booksRow = document.querySelector('#books');
 const bookForm = document.forms['book-form'];
 const closeModalBtn = document.querySelector('#close-modal');
+const tabs = document.querySelectorAll('#tabs .nav-link');
 
 function addBook(book) {
   books.push(book);
@@ -161,6 +162,16 @@ function main() {
     description.value = '';
     coverUrl.value = '';
     closeModalBtn.click();
+  });
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(tabRemove => {
+        tabRemove.classList.remove('active');
+      });
+      tab.classList.add('active');
+      renderBooks(tab.textContent);
+    });
   });
 }
 
