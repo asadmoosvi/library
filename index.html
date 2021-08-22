@@ -38,7 +38,11 @@
             <a class="nav-link" href="#">Unread</a>
           </li>
         </ul>
-        <button class="btn btn-outline-primary mt-3 mt-sm-0">
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#add-book-modal"
+          class="btn btn-outline-primary mt-3 mt-sm-0"
+        >
           <i class="bi bi-plus-lg"></i> Add book
         </button>
       </div>
@@ -47,6 +51,98 @@
         id="books"
       ></div>
     </main>
+
+    <div
+      class="modal fade"
+      id="add-book-modal"
+      tabindex="-1"
+      aria-labelledby="modalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Add a book</h5>
+            <button
+              id="close-modal"
+              class="btn-close"
+              aria-label="Close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="book-form">
+              <div class="mb-2">
+                <label for="name" class="form-label">Book name</label>
+                <input required type="text" name="name" id="name" class="form-control" />
+              </div>
+              <div class="mb-2">
+                <label for="author" class="form-label">Book author</label>
+                <input
+                  required
+                  type="text"
+                  name="author"
+                  id="author"
+                  class="form-control"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="pages" class="form-label"
+                  >Book number of pages</label
+                >
+                <input
+                  required
+                  type="number"
+                  name="pages"
+                  id="pages"
+                  class="form-control"
+                />
+              </div>
+              <div class="mb-2 form-check form-switch">
+                <input
+                  type="checkbox"
+                  name="read"
+                  id="read"
+                  class="form-check-input"
+                />
+                <label for="read" class="form-check-label">Read</label>
+              </div>
+              <div class="mb-2">
+                <label for="description" class="form-label"
+                  >Book description</label
+                >
+                <textarea
+                  required
+                  name="description"
+                  id="description"
+                  class="form-control"
+                ></textarea>
+              </div>
+              <div class="mb-2">
+                <label for="cover" class="form-label"
+                  >Book cover image URL</label
+                >
+                <input
+                  type="text"
+                  name="cover"
+                  id="cover"
+                  class="form-control"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary"
+              type="submit"
+              form="book-form"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
