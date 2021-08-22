@@ -19,8 +19,11 @@ async function getCoverUrl(title, author) {
         for (let authorName of result.author_name) {
           let authorNameMin = authorName.toLowerCase().replaceAll(' ', '');
           if (author.toLowerCase().replaceAll(' ', '') === authorNameMin) {
-            resultFound = result;
-            break;
+            // only choose item if it has a valid cover image
+            if (result.cover_i) {
+              resultFound = result;
+              break;
+            }
           }
         }
         if (resultFound) {
