@@ -71,12 +71,18 @@ function renderBooks() {
     cardFooter.classList.add(
       'card-footer',
       'd-flex',
-      'justify-content-between'
+      'justify-content-between',
+      'align-items-center'
     );
 
     const cardPages = document.createElement('small');
     cardPages.classList.add('text-muted');
     cardPages.textContent = `${book.pages} pages`;
+
+    const cardDelete = document.createElement('a');
+    cardDelete.classList.add('text-danger');
+    cardDelete.setAttribute('href', '#');
+    cardDelete.innerHTML = '<i class="bi bi-trash-fill"></i>';
 
     const cardSwitch = document.createElement('div');
     cardSwitch.classList.add('form-switch', 'form-check');
@@ -114,7 +120,7 @@ function renderBooks() {
     col.appendChild(card);
     card.append(img, cardBody, cardFooter);
     cardBody.append(cardTitle, cardAuthor, cardDescription);
-    cardFooter.append(cardPages, cardSwitch);
+    cardFooter.append(cardPages, cardSwitch, cardDelete);
     cardSwitch.append(cardCheckbox, readStatus);
     booksRow.appendChild(col);
   });
