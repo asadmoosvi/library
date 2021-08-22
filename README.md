@@ -4,6 +4,11 @@ This project is part of [The Odin Project's Foundation Course](https://www.theod
 It is a small books library application that lets you keep track of the books
 that you are currently reading or have already read.
 
+## notes
+Supplying a custom cover image URL using the form is completely optional. If
+one is not provided, it will try to be fetched using an API. This is much more
+user friendly.
+
 ## screenshots
 
 ![first screenshot](./screenshot1.png)
