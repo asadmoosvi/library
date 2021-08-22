@@ -89,7 +89,7 @@ function renderBooks() {
     const readStatus = document.createElement('small');
     if (book.read) {
       readStatus.classList.add('text-success');
-      readStatus.textContent = '✅ Read';
+      readStatus.textContent = '✓ Read';
       cardCheckbox.checked = true;
     } else {
       readStatus.classList.add('text-muted');
@@ -99,7 +99,7 @@ function renderBooks() {
 
     cardCheckbox.addEventListener('change', () => {
       if (cardCheckbox.checked) {
-        readStatus.textContent = '✅ Read';
+        readStatus.textContent = '✓ Read';
         readStatus.setAttribute('class', 'text-success');
         console.log('setting index ' + cardCheckbox.dataset.index + ' to true');
         books[cardCheckbox.dataset.index].read = true;
