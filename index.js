@@ -61,7 +61,7 @@ function Book(name, author, pages, read, description, coverUrl) {
   this.coverUrl = coverUrl;
   if (!this.coverUrl) {
     this.coverUrl =
-      'https://via.placeholder.com/800x600?text=Missing+Cover+Image';
+      'https://via.placeholder.com/400x600?text=Missing+Cover+Image';
   }
 }
 
@@ -78,6 +78,21 @@ function saveToStorage() {
 function addBook(book) {
   books.push(book);
   saveToStorage();
+
+    // search for missing book covers
+  if (book.coverUrl.match(/Missing/)) {
+    book.coverUrl = 'https://via.placeholder.com/400x600?text=Searching+for+cover+image';
+    renderBooks(getActiveTab());
+    getCoverUrl(book.name, book.author).then(url => {
+      if (url) {
+        book.coverUrl = url;
+      } else {
+        book.coverUrl = 'https://via.placeholder.com/400x600?text=Cover+image+not+found';
+      }
+      renderBooks(getActiveTab());
+    });
+  }
+
 }
 
 function getActiveTab() {
@@ -179,17 +194,6 @@ function renderBooks(type) {
     booksRow.appendChild(col);
   });
   saveToStorage();
-
-  books.forEach(book => {
-    if (book.coverUrl.match(/placeholder/)) {
-      getCoverUrl(book.name, book.author).then(url => {
-        if (url) {
-          book.coverUrl = url;
-          renderBooks(getActiveTab());
-        }
-      });
-    }
-  });
 }
 
 // load books from local storage
