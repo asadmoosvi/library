@@ -16,13 +16,15 @@ async function getCoverUrl(title, author) {
       let resultFound = null;
       let coverUrl = null;
       for (let result of results) {
-        for (let authorName of result.author_name) {
-          let authorNameMin = authorName.toLowerCase().replaceAll(' ', '');
-          if (author.toLowerCase().replaceAll(' ', '') === authorNameMin) {
-            // only choose item if it has a valid cover image
-            if (result.cover_i) {
-              resultFound = result;
-              break;
+        if (result.author_name) {
+          for (let authorName of result.author_name) {
+            let authorNameMin = authorName.toLowerCase().replaceAll(' ', '');
+            if (author.toLowerCase().replaceAll(' ', '') === authorNameMin) {
+              // only choose item if it has a valid cover image
+              if (result.cover_i) {
+                resultFound = result;
+                break;
+              }
             }
           }
         }
