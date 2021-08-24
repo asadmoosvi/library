@@ -145,7 +145,7 @@ function renderBooks(type) {
 
     const cardDelete = document.createElement('a');
     cardDelete.classList.add('text-danger');
-    cardDelete.setAttribute('href', '#');
+    cardDelete.setAttribute('href', 'javascript:;');
     cardDelete.dataset.index = idx;
     cardDelete.innerHTML = '<i class="bi bi-trash-fill"></i>';
 
